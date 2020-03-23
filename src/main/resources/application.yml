@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: example
+  profiles:
+    active: local
+management:
+  endpoint:
+    health:
+      show-details: always

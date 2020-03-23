@@ -1,0 +1,196 @@
+buildscript {
+}
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'groovy'
+    id 'idea'
+    id 'scala'
+    id 'java-library'
+    id 'jacoco'
+    //id "gradle-clojure.clojure" version '0.5.0-alpha.1'
+    //id "io.spring.dependency-management" version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+//    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
+}
+
+ext['springBootVersion'] = '2.2.5.RELEASE'
+ext['apacheCamelVersion'] = '3.0.1'
+ext['kotlinVersion'] = '1.3.61'
+ext['groovyVersion'] = '2.5.9'
+ext['qualityPluginVersion'] = '3.0.0'
+ext['codenarcPluginVersion'] = '0.20.0'
+ext['activemqVersion'] = '5.15.10'
+ext['jolokiaVersion'] = '1.6.2'
+ext['postgresqlVersion'] = '42.2.9'
+ext['kafkaVersion'] = '2.4.0'
+ext['hibernateVersion'] = '5.4.10.Final'
+ext['h2Version'] = '1.4.200'
+ext['clojureVersion'] = '1.10.1'
+ext['scalaVersion'] = '2.13.1'
+ext['gradleVersion'] = '6.1'
+ext['mongoVersion'] = '3.12.0'
+ext['wmqVersion'] = '7.0.1.9'
+ext['swaggerVersion'] = '2.9.2'
+//def swaggerVersion='2.0.10'
+ext['cucumberVersion'] = '4.8.0'
+ext['springJmsVersion'] = '5.2.1.RELEASE'
+ext['lombokVersion'] = '1.18.10'
+ext['bootstrapVersion'] = '4.3.1'
+ext['jqueryVersion'] = '3.4.1'
+ext['spockVersion'] = '1.3-groovy-2.5'
+//ext['spockVersion'] = '2.0-M1-groovy-2.5'
+ext['poiVersion'] = '4.1.0'
+ext['logbackVersion'] = '1.2.3'
+ext['powerMockVersion'] = '2.0.4'
+ext['javaFakerVersion'] = '1.0.1'
+ext['junitVersion='] = '5.3.1'
+ext['mockitoVersion'] = '2.23.0'
+ext['oracleVersion='] = '12.1.0.2'
+ext['thymeleafVersion'] = '3.0.10.RELEASE'
+ext['jdbcTemplateVersion'] = '5.2.2.RELEASE'
+ext['testContainersVersion'] = '1.12.3'
+ext['httpBuilderVersion'] = '1.0.4'
+ext['randomBeanVersion'] = '3.7.0'
+ext['jacksonKotlinVersion'] = '2.9.7'
+ext['hibernateJpaVersion'] = '1.0.0.Final'
+
+ext['groovy.version'] = '${gradleVersion}'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/scala'
+
+    test {
+        groovy.srcDir file('src/test/unit/groovy')
+        groovy.srcDir file('src/test/unit/java')
+        resources.srcDir file('src/main/resources')
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+
+    integrationTest {
+        groovy.srcDir file('src/test/integration/groovy')
+        resources.srcDir file('src/main/resources')
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+
+    functionalTest {
+        groovy.srcDir file('src/test/functional/groovy')
+        resources.srcDir file('src/main/resources')
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+
+    performanceTest {
+        groovy.srcDir file('src/test/performance/groovy')
+        resources.srcDir file('src/main/resources')
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}
+
+//compileKotlin {
+//    //kotlinOptions.jvmTarget = '11'
+//    kotlinOptions.jvmTarget = '1.8'
+//}
+
+//compileTestKotlin {
+//    //kotlinOptions.jvmTarget = '11'
+//    kotlinOptions.jvmTarget = '1.8'
+//}
+
+//compileJava {
+//    options.annotationProcessorPath = configurations.annotationProcessor
+//}
+
+wrapper {
+    gradleVersion="${gradleVersion}"
+}
+
+dependencies {
+    //Kotlin
+    // implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+    // implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    // implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonKotlinVersion}")
+    //Scala
+    implementation("org.scala-lang:scala-library:${scalaVersion}")
+
+    //Groovy
+    implementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
+
+    //Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+//    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}")
+//    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+//    implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+//    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+
+    //Camel
+    //implementation("org.apache.camel:camel-core:${apacheCamelVersion}")
+
+    //excel
+//    implementation("org.apache.poi:poi:${poiVersion}")
+//    implementation("org.apache.poi:poi-ooxml:${poiVersion}")
+
+    //postgres
+    //runtimeOnly("org.postgresql:postgresql:${postgresqlVersion}")
+
+    //h2 database
+    //runtimeOnly("com.h2database:h2:${h2Version}")
+
+    //hibernate
+    //implementation("org.hibernate:hibernate-core:${hibernateVersion}")
+    //implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}")
+
+    //Logging
+    implementation("ch.qos.logback:logback-classic:${logbackVersion}")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    //annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    //testing modules
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testImplementation("org.spockframework:spock-core:${spockVersion}")
+    testImplementation("org.spockframework:spock-spring:${spockVersion}")
+    testImplementation("org.testcontainers:spock:${testContainersVersion}")
+    testImplementation("io.github.http-builder-ng:http-builder-ng-core:${httpBuilderVersion}")
+    //testImplementation("com.github.javafaker:javafaker:${javaFakerVersion}") { exclude module: 'org.yaml' }
+    //testImplementation("io.github.benas:${randomBeanVersion}")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    environment "CAMEL_ROUTE_ENABLED", "true"
+    environment "JSON_FILES_INPUT_PATH", "json_in"
+    environment "JSON_FILES_INPUT_PATH", "excel_in"
+    environment "INPUT_FILEPATH", "config"
+    environment "OUTPUT_FILEPATH", "json_out"
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+task functionalTest(type: Test) {
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
+    classpath = sourceSets.functionalTest.runtimeClasspath
+}
+
+task performanceTest(type: Test) {
+    testClassesDirs = sourceSets.performanceTest.output.classesDirs
+    classpath = sourceSets.performanceTest.runtimeClasspath
+}
