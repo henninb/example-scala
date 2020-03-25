@@ -3,14 +3,17 @@ services:
   example:
     build:
       context: ./
+      args:
+       - key=val
       dockerfile: Dockerfile
     container_name: example
     ports:
       - "8080:8080"
-#    volumes:
-#      - logs:/apps/docker/logs
+    volumes:
+      - ./logs:/opt/example/logs
+      - ./ssl:/opt/example/ssl
     env_file:
-      - env
+      - env.prod
       - env.secrets
 #    environment:
 #      - DOCKER_HOST_IP=${DOCKER_HOST_IP}
