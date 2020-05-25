@@ -15,9 +15,9 @@ plugins {
 //    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
 }
 
-ext['springBootVersion'] = '2.2.5.RELEASE'
+ext['springBootVersion'] = '2.3.0.RELEASE'
 ext['apacheCamelVersion'] = '3.0.1'
-ext['kotlinVersion'] = '1.3.61'
+ext['kotlinVersion'] = '1.3.72'
 ext['groovyVersion'] = '2.5.9'
 ext['qualityPluginVersion'] = '3.0.0'
 ext['codenarcPluginVersion'] = '0.20.0'
