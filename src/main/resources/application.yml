@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   application:
     name: example
@@ -7,3 +9,4 @@ management:
   endpoint:
     health:
       show-details: always
+debug: false
