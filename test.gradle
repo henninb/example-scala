@@ -32,30 +32,20 @@ sourceSets {
     }
 }
 
-compileTestKotlin {
-    //kotlinOptions.jvmTarget = '11'
-    kotlinOptions.jvmTarget = '1.8'
-}
-
 dependencies {
+    //Groovy
+    testImplementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
     //testing modules
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testImplementation("org.spockframework:spock-core:${spockVersion}")
     testImplementation("org.spockframework:spock-spring:${spockVersion}")
     testImplementation("org.testcontainers:spock:${testContainersVersion}")
     testImplementation("io.github.http-builder-ng:http-builder-ng-core:${httpBuilderVersion}")
-    //testImplementation("org.scalatest:scalatest_2.11:3.0.0")
-    //testImplementation("com.github.javafaker:javafaker:${javaFakerVersion}") { exclude module: 'org.yaml' }
-    //testImplementation("io.github.benas:${randomBeanVersion}")
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 tasks.withType(Test) {
     environment "CAMEL_ROUTE_ENABLED", "true"
-    environment "JSON_FILES_INPUT_PATH", "json_in"
-    environment "JSON_FILES_INPUT_PATH", "excel_in"
-    environment "INPUT_FILEPATH", "config"
-    environment "OUTPUT_FILEPATH", "json_out"
     //systemProperties = System.properties
 }
 
