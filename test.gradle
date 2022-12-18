@@ -34,7 +34,7 @@ sourceSets {
 
 dependencies {
     //Groovy
-    testImplementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    testImplementation("org.apache.groovy:groovy:${groovyVersion}")
     //testing modules
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testImplementation("org.spockframework:spock-core:${spockVersion}")

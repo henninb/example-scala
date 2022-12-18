@@ -4,7 +4,7 @@ spring:
   application:
     name: example
   profiles:
-    active: local
+    active: prod
 management:
   endpoint:
     health:

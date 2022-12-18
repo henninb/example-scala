@@ -9,8 +9,8 @@ plugins {
     id 'scala'
     id 'java-library'
     id 'jacoco'
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
-    id "com.github.ben-manes.versions" version "0.33.0"
+    id "org.springframework.boot" version "${springBootVersion}"
+    id "com.github.ben-manes.versions" version "${gradleVersionsPlugin}"
 }
 
 apply from: "test.gradle"
@@ -22,38 +22,7 @@ repositories {
     }
 }
 
-sourceSets {
-    main.java.srcDirs += 'src/main/scala'
 
-    test {
-        groovy.srcDir file('src/test/unit/groovy')
-        groovy.srcDir file('src/test/unit/java')
-        resources.srcDir file('src/main/resources')
-        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
-        runtimeClasspath += output + compileClasspath
-    }
-
-    integrationTest {
-        groovy.srcDir file('src/test/integration/groovy')
-        resources.srcDir file('src/main/resources')
-        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
-        runtimeClasspath += output + compileClasspath
-    }
-
-    functionalTest {
-        groovy.srcDir file('src/test/functional/groovy')
-        resources.srcDir file('src/main/resources')
-        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
-        runtimeClasspath += output + compileClasspath
-    }
-
-    performanceTest {
-        groovy.srcDir file('src/test/performance/groovy')
-        resources.srcDir file('src/main/resources')
-        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
-        runtimeClasspath += output + compileClasspath
-    }
-}
 
 //compileJava {
 //    options.annotationProcessorPath = configurations.annotationProcessor
@@ -82,14 +51,13 @@ dependencies {
 //    implementation("org.apache.poi:poi-ooxml:${poiVersion}")
 
     //postgres
-    //runtimeOnly("org.postgresql:postgresql:${postgresqlVersion}")
+    runtimeOnly("org.postgresql:postgresql:${postgresqlVersion}")
 
     //h2 database
     //runtimeOnly("com.h2database:h2:${h2Version}")
 
     //hibernate
-    //implementation("org.hibernate:hibernate-core:${hibernateVersion}")
-    //implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}")
+    implementation("org.hibernate:hibernate-core:${hibernateVersion}")
 
     //Logging
     implementation("ch.qos.logback:logback-classic:${logbackVersion}")
