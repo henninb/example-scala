@@ -1,4 +1,5 @@
-FROM openjdk:11
+# FROM openjdk:17-alpine
+FROM openjdk:17
 #FROM openjdk:8
 
 ARG TIMEZONE="set the time zone at build time"
@@ -17,7 +18,9 @@ RUN mkdir -p -m 0775 /opt/${APP}/json_in
 RUN mkdir -p -m 0775 /opt/${APP}/excel_in
 RUN mkdir -p -m 0775 /opt/${APP}/config
 RUN mkdir -p -m 0775 /opt/${APP}/json_out
-ADD ./build/libs/${APP}*.jar /opt/${APP}/bin/${APP}.jar
+
+
+ADD ./build/libs/${APP}.jar /opt/${APP}/bin/${APP}.jar
 RUN chown -R ${USERNAME}:${USERNAME} /opt/${APP}/*
 
 WORKDIR /opt/${APP}/bin
