@@ -1,6 +1,5 @@
-package example.controllers.TodoController;
+package example.controllers;
 
-import example.domain.Todo
 import example.repositories.TodoRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -15,7 +14,8 @@ class TodoController @Autowired()(todoRepository : TodoRepository) {
         val mav: ModelAndView = new ModelAndView("index")
         //val dataList: List = todoRepository.findAll()
 
-        val dataList : List[Todo] = todoRepository.findAll()
+        //val dataList : List[Todo] = todoRepository.findAll()
+        val dataList  = todoRepository.findAll()
         println(dataList)
         println("test")
         mav.addObject("todos", dataList)
