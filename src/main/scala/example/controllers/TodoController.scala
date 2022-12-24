@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 class TodoController @Autowired()(todoRepository : TodoRepository) {
-    @RequestMapping(path = Array("/index"), method = Array(RequestMethod.GET))
+    @RequestMapping(path = Array("/index", "/"), method = Array(RequestMethod.GET))
     def index: ModelAndView = {
         val mav: ModelAndView = new ModelAndView("index")
         val dataList  = todoRepository.findAll()
