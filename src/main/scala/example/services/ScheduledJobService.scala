@@ -5,9 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException
 import org.springframework.scheduling.annotation.Scheduled
 
 @Component
-class PersonService {
-
-
+class ScheduledJobService {
   @Scheduled(fixedDelay = 5000)
   def runMe(): Unit = {
     print("scheduling works.\n")
