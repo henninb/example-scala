@@ -2,14 +2,15 @@ package example.domain
 
 import jakarta.persistence.{Entity, GeneratedValue, Id}
 
-@Entity
-class Todo {
-  @Id
-  @GeneratedValue
-  //@BeanProperty
-  var id: Long = _
+import scala.annotation.meta.field
+import scala.beans.BeanProperty
 
-  //@BeanProperty
-  //@NotEmpty
-  var name: String = _
+@Entity
+case class Todo(@(Id@field)
+                      @(GeneratedValue@field)
+                      @BeanProperty id: Long,
+                      @BeanProperty text: String) {
+  def this() = {
+    this(0, "")
+  }
 }
